@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Online Train Management System">
+    <link rel="icon" href="1-4.jpg">
+    <title>ITR Railway Management</title>
+    <style>
+        h1{
+            color: #FFFFFF;
+            background-color: #FF9966;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            width: 50%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 5px;
+            border-radius: 6px;
+            border: black 2px solid;
+        }
+        table,tr,td{
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            border-spacing: 1px;
+            border-radius: 6px;
+            color: #FFFFFF;
+            background-color: transparent;
+            padding: 1px;
+            border: rgb(10, 12, 46) 2px solid;
+        }
+        #submit{
+            color: #FFFFFF;
+            background-color: #FF9966;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-left: 25%;
+            margin-right: 25%;
+            padding: 5px;
+            width: 50%;
+            font-weight: bold;
+            border-radius: 6px;
+            text-align: center;
+            border:black 2px solid;
+            
+        }
+        #results{
+            color: #00FF99;
+            font-size: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+        body{
+            background-image: url("photo-1431620828042-54af7f3a9e28.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        input{
+            width:98%;
+            height: auto;
+            border-radius: 5px;
+        }
+        select{
+            width:100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ITR Railway Management</h1>
+    <form onsubmit="return display()">
+        <table>
+            <tr>
+                <td>Passenger Name</td>
+                <td><input type="text" id="pname" name="pname" placeholder="Enter the passenger name" required></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td><input type="text" id="phno" name="phno" placeholder="Enter the phone number" pattern="[0-9]{10}" required></td>
+            </tr>
+            <tr>
+                <td>PNR Number</td>
+                <td><input type="text" id="tid" name="tid" placeholder="Enter the PNR Number" pattern="[a-zA-Z0-9]{10}"></td>
+            </tr>
+            <tr>
+                <td>Date of Trip</td>
+                <td><input type="date" id="tripdate" name="tripdate" required></td>
+            </tr>
+            <tr>
+                <td>Number of Tickets</td>
+                <td><input type="number" id="noOfTickets" name="noOfTickets" placeholder="Enter the number of tickets" required></td>
+            </tr>
+            <tr>
+                <td>Date of Cancellation</td>
+                <td><input type="date" id="cancel" name="cancel" required></td>
+            </tr>
+            <tr>
+                <td>Seat Type</td>
+                <td><select id="stype" name="stype">
+                    <option value="Select Seat Type">Select Seat Type..</option>
+                    <option value="SS">SecondSitting(SS)</option>
+                    <option value="SL">Sleeper(SL)</option>
+                    <option value="3A">AC 3-tier(3A)</option>
+                    <option value="2A">AC 2-tier(2A)</option>
+                    <option value="1A">First AC(1A)</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td>Amount Paid</td>
+                <td><input type="text" id="amount" name="amount" placeholder="Enter the amount paid" required></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" id="submit" name="submit" value="CONFIRM CANCELLATION">
+    </form>
+    <br>
+    <div id="results"></div>
+    <script>
+        function display()
+        {
+            var pname=document.getElementById("pname").value;
+            var stype=document.getElementById("stype").value;
+            var noOfTickets=document.getElementById("noOfTickets").value;
+            var amount=document.getElementById("amount").value;
+            var cfee;
+            var Ccharge;
+            var refund;
+            if(stype=="SS")
+            {
+                cfee=noOfTickets*10;
+                Ccharge=amount*0.3;
+                refund=amount-cfee-Ccharge;
+            }
+            if(stype=="SL")
+            {
+                cfee=noOfTickets*30;
+                Ccharge=amount*0.4;
+                refund=amount-cfee-Ccharge;
+            }
+            if(stype=="3A")
+            {
+                cfee=noOfTickets*40;
+                Ccharge=amount*0.5;
+                refund=amount-cfee-Ccharge;
+            }
+            if(stype=="2A")
+            {
+                cfee=noOfTickets*50;
+                Ccharge=amount*0.6;
+                refund=amount-cfee-Ccharge;
+            }
+            if(stype=="1A")
+            {
+                cfee=noOfTickets*60;
+                Ccharge=amount*0.6;
+                refund=amount-cfee-Ccharge;
+            }
+            document.getElementById("results").innerHTML="Hi "+pname+", your ticket has been successfully cancelled and the refund amount after deducting inclusive charges is Rs."+Math.round(refund);
+            return false;
+       }
+    </script>
+</body>
+</html>
